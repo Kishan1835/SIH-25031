@@ -1,4 +1,4 @@
-# 📱 MCD311 Backend (Clone)
+# 📱 Nagrik Saathi Backend (Clone)
 
 Backend for the MCD311 complaint app – built with **Node.js, Express, MongoDB, JWT Auth, and Cloudinary for photo uploads**.
 
@@ -93,3 +93,4 @@ Body (**form-data**):
 - Complaints store images on **Cloudinary** and save links in MongoDB.
 - Only **admin** users can update or delete complaints.
 - Citizens can create and view their complaints.
+
