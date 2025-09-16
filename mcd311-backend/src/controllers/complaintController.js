@@ -3,14 +3,18 @@ import Complaint from "../models/Complaint.js";
 // @desc Create complaint
 export const createComplaint = async (req, res) => {
     try {
-        const { category, description, latitude, longitude, address } = req.body;
+        const { category, description, location } = req.body;
 
         const complaint = new Complaint({
             userId: req.user.id, // from auth middleware
             category,
             description,
-            location: { latitude, longitude, address },
-            photos: req.files ? req.files.map(file => file.path) : [] // Cloudinary URLs
+            location: {
+                latitude: location?.latitude,
+                longitude: location?.longitude,
+                address: location?.address
+            },
+            photos: req.files ? req.files.map(file => file.path) : []
         });
 
         await complaint.save();
@@ -19,6 +23,7 @@ export const createComplaint = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+
 
 
 // @desc Get all complaints (filterable)
