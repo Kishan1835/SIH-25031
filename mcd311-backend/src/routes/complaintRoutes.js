@@ -1,20 +1,19 @@
 import express from "express";
-import {
-    createComplaint,
-    getComplaints,
-    getComplaintById,
-    updateComplaintStatus,
-    deleteComplaint
-} from "../controllers/complaintController.js";
-import { protect, adminOnly } from "../middlewares/authMiddleware.js";
+import { createComplaint } from "../controllers/complaintController.js";
 import upload from "../utils/upload.js";
+import { createComplaintValidator } from "../validators/complaintValidator.js";
+import { validateRequest } from "../middlewares/validationMiddleware.js";
+import { protect } from "../middlewares/authMiddleware.js"; // 👈 import protect
 
 const router = express.Router();
 
-router.post("/", protect, upload.array("photos", 5), createComplaint);
-router.get("/", protect, getComplaints);
-router.get("/:id", protect, getComplaintById);
-router.put("/:id/status", protect, adminOnly, updateComplaintStatus);
-router.delete("/:id", protect, adminOnly, deleteComplaint);
+router.post(
+    "/",
+    protect, 
+    upload.array("photos", 3),
+    createComplaintValidator,
+    validateRequest,
+    createComplaint
+);
 
 export default router;

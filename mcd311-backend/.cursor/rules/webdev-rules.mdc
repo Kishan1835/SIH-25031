@@ -1,0 +1,81 @@
+# .cursorrules
+# Personalized Cursor Rules for Kishan (Web Developer + MCA Student)
+# Focus: Production-grade Web Development + Learning Mindset
+
+rules:
+  - name: Code Organization & Structure
+    directives:
+      - Maintain clear separation: `components/`, `pages/`, `services/`, `hooks/`, `lib/`, `tests/`.
+      - Use feature-based folders when projects grow (e.g., `auth/`, `dashboard/`).
+      - Keep utilities reusable; avoid duplicating logic across components.
+      - For backend (Node.js/Next.js API routes), group related endpoints in `routes/` or `api/` with service layers.
+
+  - name: Syntax & Formatting Standards
+    directives:
+      - Enforce ESLint + Prettier with TypeScript strict mode.
+      - Prefer modern syntax: async/await, ES modules, arrow functions.
+      - Use consistent naming: camelCase (vars/functions), PascalCase (React components), snake_case for DB.
+      - Limit function size to <50 lines; break into smaller helpers when complex.
+      - Use TypeScript interfaces/types for clarity and autocomplete benefits.
+
+  - name: Error Handling & Debugging
+    directives:
+      - Always wrap async calls in try/catch with meaningful error logs.
+      - Use Next.js error boundaries (`error.tsx`) for frontend crashes.
+      - Implement API error middleware in backend (`/api/_middleware.ts`).
+      - Use structured logs with context (`userId`, `requestId`).
+      - In dev: keep verbose console logs; in prod: log to monitoring (e.g., Sentry, Logtail).
+
+  - name: Performance Optimization
+    directives:
+      - For React: use `React.memo`, `useMemo`, and `useCallback` to prevent unnecessary renders.
+      - For database (Prisma/NeonDB): use indexes, paginate large queries, prefer SELECT fields over `*`.
+      - Cache repeated queries in-memory/Redis when possible.
+      - In Next.js, leverage static generation (SSG/ISR) for pages that don’t need real-time updates.
+      - Profile before optimizing — avoid guessing.
+
+  - name: Security Best Practices
+    directives:
+      - No hardcoded secrets; store in `.env` and load securely.
+      - Use parameterized queries with Prisma (already default safe).
+      - Sanitize all user input on both frontend and backend.
+      - Apply role-based access controls (RBAC) for APIs.
+      - Enable HTTPS, secure cookies, CSRF protection where applicable.
+
+  - name: Code Commenting & Documentation
+    directives:
+      - Comment reasoning behind complex logic — focus on “why”.
+      - Use JSDoc/TypeDoc for APIs, utility functions, and hooks.
+      - Keep README updated with project setup, run, and deploy steps.
+      - Add ADRs (Architecture Decision Records) for big design choices in a `docs/` folder.
+      - Use TODO/FIXME comments with context when deferring improvements.
+
+  - name: Version Control Integration
+    directives:
+      - Use Git feature branches (`feature/`, `fix/`, `chore/`) and write clean commit messages.
+      - Automate lint/test checks with Husky pre-commit hooks.
+      - For learning projects: commit frequently, experiment in separate branches.
+      - For production projects: squash commits into clean history before merging.
+      - Maintain CHANGELOG.md for production apps.
+
+  - name: Adaptability (Learning vs Production)
+    directives:
+      - Use `.env.development` vs `.env.production` for clear separation.
+      - For experiments, create `playground/` folder to test snippets without polluting main code.
+      - In learning mode: allow verbose logs, console debugging, fast iteration.
+      - In production mode: remove console logs, enforce stricter TypeScript rules, and monitor with APM tools.
+      - Document what you “learned” after each major experiment in a `LEARNINGS.md`.
+
+metadata:
+  applies_to:
+    - React
+    - Next.js
+    - Node.js
+    - Prisma + NeonDB
+    - AWS / Cloud Deployments
+  enforced_with:
+    - ESLint + Prettier
+    - Husky + Commitlint
+    - GitHub Actions / CI/CD
+    - Sentry (for error tracking)
+    - Vercel / AWS (for deployment)
