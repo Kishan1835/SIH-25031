@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import multer from "multer";
 import { v2 as cloudinary } from "cloudinary";
-console.log('upload.js - process.env.NODE_ENV:', process.env.NODE_ENV);
+// console.log('upload.js - process.env.NODE_ENV:', process.env.NODE_ENV);
 import { CloudinaryStorage } from "multer-storage-cloudinary";
 
 // Cloudinary config

@@ -76,3 +76,13 @@ export const deleteComplaint = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+
+// @desc Get complaints by logged-in user
+export const getComplaintsByUser = async (req, res) => {
+    try {
+        const complaints = await Complaint.find({ userId: req.user.id }).populate("userId", "name email");
+        res.json(complaints);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
